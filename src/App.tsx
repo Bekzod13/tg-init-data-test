@@ -5,7 +5,7 @@ import './App.css'
 import { retrieveLaunchParams } from '@telegram-apps/sdk';
 import axios from 'axios';
 
-const url = `https://api.telegram.org/bot7047679046:AAG7OJH-VrVwK8Y9zuprB-dZ3xTaCP-mQO0/sendMessage`;
+// const url = `https://api.telegram.org/bot7047679046:AAG7OJH-VrVwK8Y9zuprB-dZ3xTaCP-mQO0/sendMessage`;
 function App() {
   const [count, setCount] = useState("")
 
@@ -15,24 +15,18 @@ function App() {
     sendInfo();
   }, []);
 
+  const backUrl = "https://telegram.circle.uz/auth";
 
   const sendInfo = async () => {
-      const result = await axios.post(url, {
-        chat_id: -1001923497935,
-        text: initDataRaw,
-        // parse_mode: 'html',
-    });
+      const result = await axios.get(backUrl, {
+        headers: {
+          Authorization: `tma ${initDataRaw}`,
+        },
+      });
+
     setCount(JSON.stringify(result))
 
   }
-
-
-  // fetch('https://example.com/api', {
-  //   method: 'POST',
-  //   headers: {
-  //     Authorization: `tma ${initDataRaw}`
-  //   },
-  // });
 
 
   return (
