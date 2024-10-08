@@ -18,7 +18,7 @@ function App() {
   const backUrl = "https://telegram.circle.uz/auth";
 
   const sendInfo = async () => {
-      const result = await axios.get(backUrl, {
+      const result = await axios.post(backUrl, null, {
         headers: {
           Authorization: `tma ${initDataRaw}`,
         },
