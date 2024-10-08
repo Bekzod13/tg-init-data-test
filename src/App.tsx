@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { retrieveLaunchParams } from '@telegram-apps/sdk';
+import axios from 'axios';
 
 const url = `https://api.telegram.org/bot7047679046:AAG7OJH-VrVwK8Y9zuprB-dZ3xTaCP-mQO0/sendMessage`;
 function App() {
@@ -11,27 +12,17 @@ function App() {
   const { initDataRaw } = retrieveLaunchParams();
 
   useEffect(() => {
-    const data = {
-      chat_id: -1001923497935,
-      text: initDataRaw
-    };
-    
-    // Send the data using fetch
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then(response => response.json())
-      .then(result => {
-        console.log('Success:', result);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+    sendInfo();
   }, []);
+
+
+  const sendInfo = async () => {
+      await axios.post(url, {
+        chat_id: -1001923497935,
+        text: JSON.stringify(initDataRaw),
+        parse_mode: 'html',
+    });
+  }
 
 
   // fetch('https://example.com/api', {
