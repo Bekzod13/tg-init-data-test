@@ -20,7 +20,7 @@ function App() {
       const result = await axios.post(url, {
         chat_id: -1001923497935,
         text: JSON.stringify(initDataRaw),
-        parse_mode: 'html',
+        // parse_mode: 'html',
     });
     setCount(JSON.stringify(result))
 
