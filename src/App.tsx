@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const url = `https://api.telegram.org/bot7047679046:AAG7OJH-VrVwK8Y9zuprB-dZ3xTaCP-mQO0/sendMessage`;
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState("")
 
   const { initDataRaw } = retrieveLaunchParams();
 
@@ -17,11 +17,13 @@ function App() {
 
 
   const sendInfo = async () => {
-      await axios.post(url, {
+      const result = await axios.post(url, {
         chat_id: -1001923497935,
         text: JSON.stringify(initDataRaw),
         parse_mode: 'html',
     });
+    setCount(JSON.stringify(result))
+
   }
 
 
@@ -43,11 +45,8 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>{count}</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
